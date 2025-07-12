@@ -1,29 +1,36 @@
-[project]
+[tool.poetry]
 name = "beach-time"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "Breno Ramon",email = "brenoramon55@gmail.com"}
-]
+description = "Sistema de agendamento de quadras de beach tennis"
+authors = ["Breno Ramon <brenoramon55@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "django (>=5.2.1,<6.0.0)",
-    "django-ninja (>=1.4.1,<2.0.0)",
-    "psycopg2-binary (>=2.9.10,<3.0.0)",
-    "python-dotenv (>=1.1.0,<2.0.0)",
-    "django-ninja-jwt (>=5.3.7,<6.0.0)",
-    "pillow (>=11.2.1,<12.0.0)",
-    "task-commit (>=0.1.18,<0.2.0)"
-]
+packages = [{ include = "core" }]
 
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+django = ">=5.2,<6.0"
+django-ninja = ">=1.4.1,<2.0.0"
+psycopg2-binary = ">=2.9.10,<3.0.0"
+python-dotenv = ">=1.1.0,<2.0.0"
+django-ninja-jwt = ">=5.3.7,<6.0.0"
+pillow = ">=11.2.1,<12.0.0"
+task-commit = ">=0.1.18,<0.2.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^9.2.0"
 black = "^25.1.0"
 isort = "^6.0.1"
+taskipy = "^1.14.1"
 
+[tool.taskipy.tasks]
+lint = "ruff check . && ruff check . --diff"
+format = "ruff check . --fix && ruff format ."
+run = "python manage.py runserver"
+mkmgr = "python manage.py makemigrations"
+mgr = "python manage.py migrate"
+requirements = "poetry export -f requirements.txt --output requirements.txt --without-hashes"
+commit = "python manage.py task_commit"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
