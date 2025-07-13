@@ -15,7 +15,6 @@ API_DOC_URL = "/docs"
 
 # Segurança
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-key")
-print(f"SECRET_KEY: {SECRET_KEY}")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = []
 
@@ -107,7 +106,6 @@ DATABASES = {
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
-print(f"DATABASES: {DATABASES}")
 # Autenticação
 
 # Modelo de usuário

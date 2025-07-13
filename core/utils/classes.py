@@ -8,7 +8,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from ninja_extra import status
 
-from core.utils import omitted_fields
+from core.utils.omitted_fields import omitted_fields
 from core.utils.model_utils import get_active_references
 
 
@@ -35,7 +35,8 @@ class Repository:
     def list(cls) -> models.QuerySet:
         """
         """
-        return cls.model.objects.all().defer(*omitted_fields)
+        queryset = cls.model.objects.all().defer(*omitted_fields)
+        return queryset
 
     @classmethod
     def get(cls, *, id: int, only: Optional[List[str]] = None) -> models.Model:
@@ -172,7 +173,6 @@ class Service:
             with transaction.atomic():
                 status_code: int
                 message: Dict[str, str]
-
                 status_code, message_or_object = cls.validate_payload(
                     payload=payload, id=id
                 )
@@ -181,6 +181,7 @@ class Service:
                     return status_code, message
 
                 instance: models.Model = message_or_object
+                instance = cls.repository.get(id=id)
 
                 instance = cls.repository.put(
                     instance=instance,

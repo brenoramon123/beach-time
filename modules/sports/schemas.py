@@ -45,5 +45,5 @@ class SportsOut(ModelSchema):
     
     class Meta:  # pylint: disable=missing-class-docstring
         model = Sports
-        fields = ['id', 'name', 'description', 'last_user']
+        fields = ['id', 'name', 'last_user']
         model_fields = '__all__'

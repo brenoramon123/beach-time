@@ -3,6 +3,7 @@ from ninja_jwt.authentication import JWTAuth
 from ninja import Swagger
 from django.conf import settings
 
+from modules.sports.controllers import SportsController
 from modules.tokens.controllers import TokenJWTController
 from modules.users.controllers import UserController
 
@@ -33,4 +34,9 @@ api = NinjaExtraAPI(
 api.register_controllers(
     TokenJWTController,
     UserController
+)
+
+# SPORTS REGISTRATIONS:
+api.register_controllers(
+    SportsController,
 )

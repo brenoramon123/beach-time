@@ -27,14 +27,8 @@ class SportsService(Service):
         instance: Optional[models.Model] = None
         if id is None:
             pass
-            # if not name:
-            #     return status.HTTP_400_BAD_REQUEST, {'name': 'O nome do esporte é obrigatório.'}
-            # if SportsRepository.model.objects.filter(name__iexact=name).exists():
-            #     return status.HTTP_400_BAD_REQUEST, {'name': 'Já existe um esporte com esse nome.'}
-            # payload['name'] = remove_excess_spaces(name).upper()
-            # status_code = status.HTTP_201_CREATED
-            # instance = SportsRepository.model(**payload)
-
+            if not name:
+                return status.HTTP_400_BAD_REQUEST, {'name': 'O nome do esporte é obrigatório.'}
         else:
             pass
 
