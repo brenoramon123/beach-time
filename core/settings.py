@@ -49,6 +49,7 @@ LOCAL_INTERNAL_APPS = [
     'modules.users',
     'modules.tokens',
     'modules.sports',
+    'modules.address',
 ]
 
 # Apps externos (ex: plugins locais ou libs customizadas)

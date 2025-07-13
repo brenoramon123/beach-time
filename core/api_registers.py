@@ -3,6 +3,7 @@ from ninja_jwt.authentication import JWTAuth
 from ninja import Swagger
 from django.conf import settings
 
+from modules.address.controllers import CityController, CountryController, FederativeUnitController
 from modules.sports.controllers import SportsController
 from modules.tokens.controllers import TokenJWTController
 from modules.users.controllers import UserController
@@ -39,4 +40,11 @@ api.register_controllers(
 # SPORTS REGISTRATIONS:
 api.register_controllers(
     SportsController,
+)
+
+# Address REGISTRATIONS:
+api.register_controllers(
+    CountryController,
+    CityController,
+    FederativeUnitController,
 )
