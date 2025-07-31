@@ -14,75 +14,76 @@ from core.utils.validators import validate_email
 from modules.users.user_manager import CustomUserManager
 
 
-
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
     Responsável por armazenar os dados de usuários,
     sendo uma customização da classe User implementada pelo Django.
     """
-    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+
+    profile_picture = models.ImageField(
+        upload_to="profile_pictures/", null=True, blank=True
+    )
 
     username: models.CharField = models.CharField(
-        verbose_name=_('Username'),
+        verbose_name=_("Username"),
         max_length=60,
         unique=True,
     )
     email = models.EmailField(
-    verbose_name=_('Email address'),
-    unique=True,
-    validators=[validate_email],
-    null=True,
-    blank=True,
+        verbose_name=_("Email address"),
+        unique=True,
+        validators=[validate_email],
+        null=True,
+        blank=True,
+    )
+    phone_number = models.CharField(
+        verbose_name=_("Phone number"),
+        max_length=20,
+        null=True,
+        blank=True,
     )
     is_admin: models.BooleanField = models.BooleanField(
-        verbose_name=_('Admin Status'),
+        verbose_name=_("Admin Status"),
         default=False,
-        help_text=_(
-            'Designates whether the user can log into the admin site.'
-        ),
+        help_text=_("Designates whether the user can log into the admin site."),
     )
     date_joined: models.DateTimeField = models.DateTimeField(
-        verbose_name=_('Join Date'),
+        verbose_name=_("Join Date"),
         auto_now_add=True,
     )
     is_notified: models.BooleanField = models.BooleanField(
-        verbose_name=_('Is Notified'),
+        verbose_name=_("Is Notified"),
         default=False,
     )
     is_active: models.BooleanField = models.BooleanField(
-        verbose_name=_('Active'),
+        verbose_name=_("Active"),
         default=True,
     )
     groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='customuser_groups',  
-        verbose_name=_('groups'),
+        "auth.Group",
+        related_name="customuser_groups",
+        verbose_name=_("groups"),
     )
     user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='customuser_permissions', 
+        "auth.Permission",
+        related_name="customuser_permissions",
         blank=True,
-        verbose_name=_('user permissions'),
+        verbose_name=_("user permissions"),
     )
-
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = "username"
 
     class Meta:  # pylint: disable=missing-class-docstring
-        ordering = ['-id']
-        verbose_name = _('User')
-        verbose_name_plural = _('Users')
+        ordering = ["-id"]
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")
 
     def __str__(self) -> str:
-        return f'{self.username}'  
+        return f"{self.username}"
 
     @property
     def is_staff(self):
         # Simplest possible answer: All admins are staff
         return self.is_admin
-
-
-

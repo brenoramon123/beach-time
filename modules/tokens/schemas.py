@@ -55,3 +55,15 @@ class CustomTokenObtainSchema(TokenObtainPairInputSchema):
         token = self.to_response_schema().access
         user_schema = UserLoginBase.from_user(self._user)
         return CustomTokenObtainOutSchema(token=token, user=user_schema)
+
+class PhoneSchema(Schema):
+    phone: str = Field(..., description='Telefone')
+
+class CodeVerificationSchema(Schema):
+    phone: str = Field(..., description='Telefone')
+    code: str = Field(..., description='Código de verificação')
+
+class FinalLoginSchema(Schema):
+    phone: str = Field(..., description='Telefone')
+    password: str = Field(..., description='Senha')
+    temp_token: str = Field(..., description='Token temporário')
