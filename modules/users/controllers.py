@@ -1,10 +1,9 @@
 from typing import Any, Tuple
 
 from django.db.models import QuerySet
-from ninja import File, Form, Query, UploadedFile
+from ninja import File, Query, UploadedFile
 from ninja_extra import api_controller, paginate, route
 from ninja_extra.ordering import Ordering, ordering
-from ninja_jwt.authentication import JWTAuth
 
 from core.schemas import CustomPagination, MessageSchema, PaginatedResponseSchema
 from core.utils.classes import Controller
@@ -30,7 +29,7 @@ class UserController(Controller):
             SUCCESS_STATUSES: UserOut,
             ERROR_STATUSES: MessageSchema,
         }, auth=None)
-    def post(self, request, payload: UserPostSchema = Form(...), profile_picture: UploadedFile = File(None)):
+    def post(self, request, payload: UserPostSchema, profile_picture: UploadedFile = File(None)):
         
         return self.service.post(payload=payload.dict(), file=profile_picture)
     

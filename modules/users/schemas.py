@@ -1,6 +1,7 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 from ninja import Field, FilterSchema, ModelSchema, Schema
+
 from .models import CustomUser
 
 class GetBaseSchema(Schema):
@@ -87,3 +88,5 @@ class UserPostSchema(Schema):
     username: str
     email: str
     password: str
+    favorite_sports: List[int]
+    phone_number: str

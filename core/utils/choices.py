@@ -512,3 +512,9 @@ REQUESTED_BY_CHOICES = [
     ("STUDENT", "Aluno"),
     ("TRAINER", "Personal"),
 ]
+
+LEVEL_CHOICES = [
+    ("BEGINNER", "Iniciante"),
+    ("INTERMEDIATE", "Intermediário"),
+    ("ADVANCED", "Avançado"),
+]

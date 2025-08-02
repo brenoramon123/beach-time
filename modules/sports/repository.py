@@ -1,7 +1,7 @@
 from typing import Dict
 from core.utils.classes import Repository
 from core.utils.filters_characters import remove_excess_spaces
-from modules.sports.models import Sports
+from modules.sports.models import FavoriteSport, Sports
 
 
 
@@ -27,3 +27,6 @@ class SportsRepository(Repository):
             updated_payload.update({"name": remove_excess_spaces(name).upper()})
 
         return updated_payload
+
+class FavoriteSportRepository(Repository):
+    model = FavoriteSport
